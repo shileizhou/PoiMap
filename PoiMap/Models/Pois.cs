@@ -70,6 +70,22 @@ namespace PoiMap.Models
         public string ARPhoto { get; set; }
         public string Website { get; set; }
 
+        public Pois()
+        {
+            PlaceId = "";
+            PlaceName = "";
+            City = "";
+            Country = "";
+            Description = "";
+            Longtitude = 0;
+            Latitude = 0;
+            Altitude = 0;
+            Icon = "";
+            MainPhoto = "";
+            Video = "";
+            Wiki = "";
+            ARName = "";
+        }
     }
 
 }
