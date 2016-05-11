@@ -5,16 +5,6 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoiMap", "PoiMap\PoiMap.csproj", "{9F5CF5E8-2FF4-4119-81D1-53CD191EF3DF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{C34BA889-6008-4D1D-B590-6DC665AD0CAC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{DEAF5785-2EF5-4276-A6BD-9E4322BFC092}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{EA852A54-3ABA-4403-A9A1-026339C217BB}"
-	ProjectSection(SolutionItems) = preProject
-		PublishScripts\Templates\PoiMap.json = PublishScripts\Templates\PoiMap.json
-		PublishScripts\Templates\PoiMap.param.dev.json = PublishScripts\Templates\PoiMap.param.dev.json
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,9 +18,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{DEAF5785-2EF5-4276-A6BD-9E4322BFC092} = {C34BA889-6008-4D1D-B590-6DC665AD0CAC}
-		{EA852A54-3ABA-4403-A9A1-026339C217BB} = {C34BA889-6008-4D1D-B590-6DC665AD0CAC}
 	EndGlobalSection
 EndGlobal
