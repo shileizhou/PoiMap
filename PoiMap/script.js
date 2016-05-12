@@ -121,7 +121,53 @@ function createMarkers(results, status) {
 
 function saveData()
 {
-        var poi = { Placeid: "test2", Placename: "tester2" };
+        //PlaceId", I
+        //PlaceName",
+        //Address", I
+        //Country", I
+        //Description
+        //Longtitude"
+        //Latitude", 
+        //Altitude", 
+        //Icon", Inpu
+        //MainPhoto",
+        //Video", Inp
+        //Wiki", Inpu
+        //ARName", In
+
+        var vPlaceid = $("#PlaceId").val()
+        var vPlaceName = $("#PlaceName").val()
+        var vAddress = $("#Address").val()
+        var vCountry = $("#Country").val()
+        var vDescription = $("#Description").val()
+        var vLongtitude = $("#Longtitude").val()
+        var vLatitude = $("#Latitude").val()
+        var vAltitude = $("#Altitude").val()
+        var vIcon = $("#Icon").val()
+        var vMainPhoto = $("#MainPhoto").val()
+        var vVideo = $("#Video").val()
+        var vWiki = $("#Wiki").val()
+        var vARName = $("#ARName").val()
+        var vARPhoto = $("#ARPhoto").val()
+        var vWebsite = $("#Website").val()
+
+        var poi = {
+            Placeid: vPlaceid,
+            Placename: vPlaceName,
+            Address: vAddress,
+            Country: vCountry,
+            Description: vDescription,
+            Longtitude: vLongtitude,
+            Latitude: vLatitude,
+            Altitude: vAltitude,
+            Icon: vIcon,
+            MainPhoto: vMainPhoto,
+            Video: vVideo,
+            Wiki: vWiki,
+            ARName: vARName,
+            ARPhoto: vARPhoto,
+            Website: vWebsite,
+            };
 
         $.ajax({
             type: "POST",
@@ -175,7 +221,8 @@ function createMarker(obj,status) {
                "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:300px;'/></td> </tr>" +
                "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:300px;'/></td> </tr>" +
                "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;'/></td> </tr>" +
-               "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;'/></td> </tr>" +
+               "<tr><td>ARName:</td> <td><input type='text' id='ARPhoto' style='width:300px;'/></td> </tr>" +
+               "<tr><td>ARName:</td> <td><input type='text' id='ARWebsite' style='width:300px;'/></td> </tr>" +
                "<tr><td></td><td><b><input type='button' value='Save' onclick='saveData()'/></b></td></tr>";
 
         //"<tr><td>Type:</td> <td><select id='type'>" +

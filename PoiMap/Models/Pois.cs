@@ -25,7 +25,7 @@ namespace PoiMap.Models
 
                         cmd.Parameters.AddWithValue("@PlaceId", InputPoi.PlaceId);
                         cmd.Parameters.AddWithValue("@PlaceName", InputPoi.PlaceName);
-                        cmd.Parameters.AddWithValue("@Address", InputPoi.City);
+                        cmd.Parameters.AddWithValue("@Address", InputPoi.Address);
                         cmd.Parameters.AddWithValue("@Country", InputPoi.Country);
                         cmd.Parameters.AddWithValue("@Description", InputPoi.Description);
                         cmd.Parameters.AddWithValue("@Longtitude", InputPoi.Longtitude);
@@ -36,6 +36,8 @@ namespace PoiMap.Models
                         cmd.Parameters.AddWithValue("@Video", InputPoi.Video);
                         cmd.Parameters.AddWithValue("@Wiki", InputPoi.Wiki);
                         cmd.Parameters.AddWithValue("@ARName", InputPoi.ARName);
+                        cmd.Parameters.AddWithValue("@ARPhoto", InputPoi.ARPhoto);
+                        cmd.Parameters.AddWithValue("@Website", InputPoi.Website);
 
                         cmd.ExecuteNonQuery();
 
@@ -56,7 +58,7 @@ namespace PoiMap.Models
     {
         public string PlaceId { get; set; }
         public string PlaceName { get; set; }
-        public string City { get; set; }
+        public string Address { get; set; }
         public string Country { get; set; }
         public string Description { get; set; }
         public decimal Longtitude { get; set; }
@@ -74,7 +76,7 @@ namespace PoiMap.Models
         {
             PlaceId = "";
             PlaceName = "";
-            City = "";
+            Address = "";
             Country = "";
             Description = "";
             Longtitude = 0;
@@ -85,6 +87,8 @@ namespace PoiMap.Models
             Video = "";
             Wiki = "";
             ARName = "";
+            ARPhoto = "";
+            Website = "";
         }
     }
 
