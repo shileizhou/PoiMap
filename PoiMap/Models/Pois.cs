@@ -53,6 +53,46 @@ namespace PoiMap.Models
             return "Success";
         }
 
+        public Pois GetPoi(string inPlaceid)
+        {
+            Pois oPois = new Pois();
+
+            try
+            {
+                using (var connection = new SqlConnection(
+                      "Server=tcp:livemap.database.windows.net,1433;Database=livemap;User ID=livemap@livemap;Password=Zhuzhu88;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
+                {
+                    connection.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("SelectPoiById", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@PlaceId", inPlaceid);
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                oPois.Address = dr["Address"].ToString();
+                                return oPois;
+                            }
+                            else
+                            {
+                                return null;
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+
+        }
+
     }
     public class Pois
     {

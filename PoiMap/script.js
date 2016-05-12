@@ -121,20 +121,6 @@ function createMarkers(results, status) {
 
 function saveData()
 {
-        //PlaceId", I
-        //PlaceName",
-        //Address", I
-        //Country", I
-        //Description
-        //Longtitude"
-        //Latitude", 
-        //Altitude", 
-        //Icon", Inpu
-        //MainPhoto",
-        //Video", Inp
-        //Wiki", Inpu
-        //ARName", In
-
         var vPlaceid = $("#PlaceId").val()
         var vPlaceName = $("#PlaceName").val()
         var vAddress = $("#Address").val()
@@ -198,32 +184,13 @@ function getLocDetails(obj) {
 // creare single marker function
 function createMarker(obj,status) {
 
-
-    var ss = "";
     if (status == google.maps.places.PlacesServiceStatus.OK) {
 
+        var ss;
+        var infowindow;
         var photos = obj.photos;
 
         if (photos) { ss = photos[0].getUrl({ 'maxWidth': 100, 'maxHeight': 70 }); }
-
-        var infocontent = "<b><center><font size=4>" + obj.name + "</font></center></b><br>" +
-               "<table style='width:400px;'>" +
-               "<tr><td>PlaceId:</td> <td><input type='text' id='PlaceId' value='" + obj.place_id + "' style='width:300px;'/> </td> </tr>" +
-               "<tr><td>PlaceName:</td> <td><input type='text' id='PlaceName' value='" + obj.name + "'style='width:300px;'/></td> </tr>" +
-               "<tr><td>Address:</td> <td><input type='text' id='Address' value='" + obj.vicinity + "' style='width:300px;'/></td> </tr>" +
-               "<tr><td>Description:</td> <td><textarea id='Description' maxlength='200' rows='5' cols='50'></textarea></td> </tr>" +
-               "<tr><td>Website:</td> <td><input type='url' id='Website'  value='" + obj.website + "' style='width:300px;'/></td> </tr>" +
-               "<tr><td>Longtitude:</td> <td><input type='number' step='0.01' id='Longtitude'  value='" + obj.geometry.location.lng() + "' /></td> </tr>" +
-               "<tr><td>Latitude:</td> <td><input type='number' step='0.01' id='Latitude'  value='" + obj.geometry.location.lat() + "' /></td> </tr>" +
-               "<tr><td>Altitude:</td> <td><input type='number' step='0.01' id='Altitude'  value='" + obj.geometry.location + "'/></td> </tr>" +
-               "<tr><td>Icon:</td> <td><input type='url' id='Icon' style='width:300px;'/></td> </tr>" +
-               "<tr><td>MainPhoto:</td> <td><input type='url' id='MainPhoto'  value='" + ss + "' style='width:300px;'/></td> </tr>" +
-               "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:300px;'/></td> </tr>" +
-               "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:300px;'/></td> </tr>" +
-               "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;'/></td> </tr>" +
-               "<tr><td>ARName:</td> <td><input type='text' id='ARPhoto' style='width:300px;'/></td> </tr>" +
-               "<tr><td>ARName:</td> <td><input type='text' id='ARWebsite' style='width:300px;'/></td> </tr>" +
-               "<tr><td></td><td><b><input type='button' value='Save' onclick='saveData()'/></b></td></tr>";
 
         //"<tr><td>Type:</td> <td><select id='type'>" +
         //"<option value='bar' SELECTED>bar</option>" +
@@ -251,9 +218,6 @@ function createMarker(obj,status) {
             //                     'Place ID: ' + place.place_id + '<br>' +
             //                     place.geometry.location);
 
-            var infowindow = new google.maps.InfoWindow({
-                content: infocontent
-            });
         }
         else {
             //ss = 'https://media.giphy.com/media/7wwyuF7GfTD0I/giphy.gif'
@@ -270,18 +234,57 @@ function createMarker(obj,status) {
 
             markers.push(mark);
 
-            // prepare info window
-
-            var infowindow = new google.maps.InfoWindow({
-                content: infocontent
-            });
         }
+
 
         // add event handler to current marker
         google.maps.event.addListener(mark, 'click', function () {
-            clearInfos();
+
+            //clearInfos();
+
+            var ss = "";
+
+            $.ajax({
+                type: "GET",
+                data: JSON.stringify(obj.place_id),
+                datatype:"JSON" ,
+                url: "api/Pois",
+                contentType: "application/json",
+                success: function (result) {
+                    ss = result.Address;
+                }
+            });
+
+            var infocontent = "<b><center><font size=4>" + obj.name + "</font></center></b><br>" +
+                   "<table style='width:400px;'>" +
+                   "<tr><td>PlaceId:</td> <td><input type='text' id='PlaceId' value='" + obj.place_id + "' style='width:300px;'/> </td> </tr>" +
+                   "<tr><td>PlaceName:</td> <td><input type='text' id='PlaceName' value='" + obj.name + "'style='width:300px;'/></td> </tr>" +
+                   "<tr><td>Address:</td> <td><input type='text' id='Address' value='" + ss + "' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>Description:</td> <td><textarea id='Description' maxlength='200' rows='5' cols='50'></textarea></td> </tr>" +
+                   "<tr><td>Website:</td> <td><input type='url' id='Website'  value='" + obj.website + "' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>Longtitude:</td> <td><input type='number' step='0.01' id='Longtitude'  value='" + obj.geometry.location.lng() + "' /></td> </tr>" +
+                   "<tr><td>Latitude:</td> <td><input type='number' step='0.01' id='Latitude'  value='" + obj.geometry.location.lat() + "' /></td> </tr>" +
+                   "<tr><td>Altitude:</td> <td><input type='number' step='0.01' id='Altitude'  value='" + obj.geometry.location + "'/></td> </tr>" +
+                   "<tr><td>Icon:</td> <td><input type='url' id='Icon' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>MainPhoto:</td> <td><input type='url' id='MainPhoto'  value='" + ss + "' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>ARName:</td> <td><input type='text' id='ARPhoto' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>ARName:</td> <td><input type='text' id='ARWebsite' style='width:300px;'/></td> </tr>" +
+                   "<tr><td></td><td><b><input type='button' value='Save' onclick='saveData()'/></b></td></tr>";
+
+            // prepare info window
+
+                infowindow = new google.maps.InfoWindow({
+                content: infocontent
+            });
+
             infowindow.open(map, mark);
+
         });
+
+
         infos.push(infowindow);
 
     }
