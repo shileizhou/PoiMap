@@ -88,6 +88,7 @@ function findPlaces() {
         location: cur_location,
         radius: radius,
         types: [type]
+        //key: 'AIzaSyBEmSuFeHW0LS6o8fEBH7uVo9AK3qw63ok'
         //language: 'ar'
 
     };
@@ -111,7 +112,7 @@ function createMarkers(results, status) {
 
         // and create new markers by search result
         for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
+            getLocDetails(results[i]);
         }
     } else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
         alert('Sorry, nothing is found');
@@ -135,88 +136,108 @@ function saveData()
 
 }
 
+function getLocDetails(obj) {
+    
+    var request = {
+        placeId: obj.place_id
+        //key: 'AIzaSyBEmSuFeHW0LS6o8fEBH7uVo9AK3qw63ok'
+        //language: 'ar'
+    };
+
+    // send request
+    service = new google.maps.places.PlacesService(map);
+    service.getDetails(request, createMarker);
+
+}
 // creare single marker function
-function createMarker(obj) {
+function createMarker(obj,status) {
 
-    var photos = obj.photos;
 
-    var infocontent = "<b><center><font size=4>" + obj.name + "</font></center></b><br>" +
-           "<table style='width:400px;'>" +
-           "<tr><td>PlaceId:</td> <td><input type='text' id='PlaceId' value='" + obj.place_id + "' style='width:300px;'/> </td> </tr>" +
-           "<tr><td>PlaceName:</td> <td><input type='text' id='PlaceName' value='" + obj.name + "'style='width:300px;'/></td> </tr>" +
-           "<tr><td>Address:</td> <td><input type='text' id='Address' value='" + obj.vicinity + "' style='width:300px;'/></td> </tr>" +
-           "<tr><td>Description:</td> <td><textarea id='Description' maxlength='200' rows='5' cols='50'></textarea></td> </tr>" +
-           "<tr><td>Website:</td> <td><input type='url' id='Website'  value='" + obj.getUrl + "' style='width:300px;'/></td> </tr>" +
-           "<tr><td>Longtitude:</td> <td><input type='number' step='0.01' id='Longtitude'  value='" + obj.geometry.location.lng() + "' /></td> </tr>" +
-           "<tr><td>Latitude:</td> <td><input type='number' step='0.01' id='Latitude'  value='" + obj.geometry.location.lat() + "' /></td> </tr>" +
-           "<tr><td>Altitude:</td> <td><input type='number' step='0.01' id='Altitude'  value='" + obj.geometry.location + "'/></td> </tr>" +
-           "<tr><td>Icon:</td> <td><input type='url' id='Icon' style='width:300px;'/></td> </tr>" +
-           "<tr><td>MainPhoto:</td> <td><input type='url' id='MainPhoto'  value='" + obj.geometry.location + "' style='width:300px;'/></td> </tr>" +
-           "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:300px;'/></td> </tr>" +
-           "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:300px;'/></td> </tr>" +
-           "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;'/></td> </tr>" +
-           "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;'/></td> </tr>" +
-           "<tr><td></td><td><b><input type='button' value='Save' onclick='saveData()'/></b></td></tr>";
+    var ss = "";
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
 
-    //"<tr><td>Type:</td> <td><select id='type'>" +
-    //"<option value='bar' SELECTED>bar</option>" +
-    //"<option value='restaurant'>restaurant</option>" +
-    //"</select> </td></tr>" + 
+        var photos = obj.photos;
 
-    if (!photos) {
-        // prepare new Marker object
-        var mark = new google.maps.Marker({
-            position: obj.geometry.location,
-            map: map,
-            title: obj.name
+        if (photos) { ss = photos[0].getUrl({ 'maxWidth': 100, 'maxHeight': 70 }); }
+
+        var infocontent = "<b><center><font size=4>" + obj.name + "</font></center></b><br>" +
+               "<table style='width:400px;'>" +
+               "<tr><td>PlaceId:</td> <td><input type='text' id='PlaceId' value='" + obj.place_id + "' style='width:300px;'/> </td> </tr>" +
+               "<tr><td>PlaceName:</td> <td><input type='text' id='PlaceName' value='" + obj.name + "'style='width:300px;'/></td> </tr>" +
+               "<tr><td>Address:</td> <td><input type='text' id='Address' value='" + obj.vicinity + "' style='width:300px;'/></td> </tr>" +
+               "<tr><td>Description:</td> <td><textarea id='Description' maxlength='200' rows='5' cols='50'></textarea></td> </tr>" +
+               "<tr><td>Website:</td> <td><input type='url' id='Website'  value='" + obj.website + "' style='width:300px;'/></td> </tr>" +
+               "<tr><td>Longtitude:</td> <td><input type='number' step='0.01' id='Longtitude'  value='" + obj.geometry.location.lng() + "' /></td> </tr>" +
+               "<tr><td>Latitude:</td> <td><input type='number' step='0.01' id='Latitude'  value='" + obj.geometry.location.lat() + "' /></td> </tr>" +
+               "<tr><td>Altitude:</td> <td><input type='number' step='0.01' id='Altitude'  value='" + obj.geometry.location + "'/></td> </tr>" +
+               "<tr><td>Icon:</td> <td><input type='url' id='Icon' style='width:300px;'/></td> </tr>" +
+               "<tr><td>MainPhoto:</td> <td><input type='url' id='MainPhoto'  value='" + ss + "' style='width:300px;'/></td> </tr>" +
+               "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:300px;'/></td> </tr>" +
+               "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:300px;'/></td> </tr>" +
+               "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;'/></td> </tr>" +
+               "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;'/></td> </tr>" +
+               "<tr><td></td><td><b><input type='button' value='Save' onclick='saveData()'/></b></td></tr>";
+
+        //"<tr><td>Type:</td> <td><select id='type'>" +
+        //"<option value='bar' SELECTED>bar</option>" +
+        //"<option value='restaurant'>restaurant</option>" +
+        //"</select> </td></tr>" + 
+
+        if (!photos) {
+            // prepare new Marker object
+            var mark = new google.maps.Marker({
+                position: obj.geometry.location,
+                map: map,
+                title: obj.name
+            });
+
+            markers.push(mark);
+
+            // prepare info window
+            //var infowindow = new google.maps.InfoWindow({
+            //    content: '<img src="' + obj.icon + '" /><font style="color:#000;">' + obj.name +
+            //    '<br />Rating: ' + obj.rating + '<br />Address: ' + obj.vicinity + '</font>' +
+            //    '<br />Web site: ' + obj.getUrl
+            //});
+
+            //infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+            //                     'Place ID: ' + place.place_id + '<br>' +
+            //                     place.geometry.location);
+
+            var infowindow = new google.maps.InfoWindow({
+                content: infocontent
+            });
+        }
+        else {
+            //ss = 'https://media.giphy.com/media/7wwyuF7GfTD0I/giphy.gif'
+            // prepare new Marker object
+            var mark = new google.maps.Marker({
+                position: obj.geometry.location,
+                map: map,
+                draggable: false,
+                optimized: false, // <-- required for animated gif
+                animation: google.maps.Animation.DROP,
+                title: obj.name,
+                icon: ss
+            });
+
+            markers.push(mark);
+
+            // prepare info window
+
+            var infowindow = new google.maps.InfoWindow({
+                content: infocontent
+            });
+        }
+
+        // add event handler to current marker
+        google.maps.event.addListener(mark, 'click', function () {
+            clearInfos();
+            infowindow.open(map, mark);
         });
+        infos.push(infowindow);
 
-        markers.push(mark);
-
-        // prepare info window
-        //var infowindow = new google.maps.InfoWindow({
-        //    content: '<img src="' + obj.icon + '" /><font style="color:#000;">' + obj.name +
-        //    '<br />Rating: ' + obj.rating + '<br />Address: ' + obj.vicinity + '</font>' +
-        //    '<br />Web site: ' + obj.getUrl
-        //});
-
-        //infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-        //                     'Place ID: ' + place.place_id + '<br>' +
-        //                     place.geometry.location);
-
-        var infowindow = new google.maps.InfoWindow({
-            content: infocontent
-        });
     }
-    else {
-        var ss = photos[0].getUrl({ 'maxWidth': 100, 'maxHeight': 70 })
-        //ss = 'https://media.giphy.com/media/7wwyuF7GfTD0I/giphy.gif'
-        // prepare new Marker object
-        var mark = new google.maps.Marker({
-            position: obj.geometry.location,
-            map: map,
-            draggable: false,
-            optimized: false, // <-- required for animated gif
-            animation: google.maps.Animation.DROP,
-            title: obj.name,
-            icon: ss
-        });
-
-        markers.push(mark);
-
-        // prepare info window
-
-        var infowindow = new google.maps.InfoWindow({
-            content: infocontent
-        });
-    }
-
-    // add event handler to current marker
-    google.maps.event.addListener(mark, 'click', function () {
-        clearInfos();
-        infowindow.open(map, mark);
-    });
-    infos.push(infowindow);
 }
 
 // initialization

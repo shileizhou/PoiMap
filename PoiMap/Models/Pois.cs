@@ -25,7 +25,7 @@ namespace PoiMap.Models
 
                         cmd.Parameters.AddWithValue("@PlaceId", InputPoi.PlaceId);
                         cmd.Parameters.AddWithValue("@PlaceName", InputPoi.PlaceName);
-                        cmd.Parameters.AddWithValue("@City", InputPoi.City);
+                        cmd.Parameters.AddWithValue("@Address", InputPoi.City);
                         cmd.Parameters.AddWithValue("@Country", InputPoi.Country);
                         cmd.Parameters.AddWithValue("@Description", InputPoi.Description);
                         cmd.Parameters.AddWithValue("@Longtitude", InputPoi.Longtitude);

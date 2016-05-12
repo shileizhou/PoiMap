@@ -18,3 +18,7 @@
         content: html
     });
 }
+
+//https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ9wzTpBhawokRWLkRYU6k64E&key=AIzaSyBEmSuFeHW0LS6o8fEBH7uVo9AK3qw63ok
+//https://maps.googleapis.com/maps/api/place/details/output?placeid:ChIJ9wzTpBhawokRWLkRYU6k64E&key=AIzaSyBEmSuFeHW0LS6o8fEBH7uVo9AK3qw63ok
+// server key: AIzaSyBEmSuFeHW0LS6o8fEBH7uVo9AK3qw63ok
