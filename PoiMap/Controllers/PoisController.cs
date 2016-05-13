@@ -25,26 +25,33 @@ namespace PoiMap.Controllers
         //        //return new string[] { "value1", "value2" };
         //}
 
-        // GET api/<controller>/5
-        //public string Get(string placeid)
-        //{
-        //    return "value";
-        //}
-
-        [HttpGet]
-        public HttpResponseMessage Get([FromBody]string placeid)
+        //GET api/<controller>/5
+        public Pois Get([FromUri]string Id)
         {
             PoisOps poisInst;
             poisInst = new PoisOps();
 
-            var myObjectResponse = poisInst.GetPoi(placeid);
+            Pois myObjectResponse = poisInst.GetPoi(Id);
 
-            // in your case this will be result of some service method and then
-            if (myObjectResponse == null)
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-
-            return Request.CreateResponse(HttpStatusCode.OK, myObjectResponse);
+            return myObjectResponse;
         }
+
+        //[System.Web.Http.HttpGet]
+        //public HttpResponseMessage GetPois([FromBody]string Id)
+        //{
+        //    PoisOps poisInst;
+        //    poisInst = new PoisOps();
+
+        //    Pois myObjectResponse = poisInst.GetPoi(Id);
+
+        //    //return myObjectResponse;
+
+        //    // in your case this will be result of some service method and then
+        //    if (myObjectResponse == null)
+        //        return Request.CreateResponse(HttpStatusCode.NotFound);
+
+        //    return Request.CreateResponse(HttpStatusCode.OK, myObjectResponse);
+        //}
 
         // POST api/<controller>
         public string Post([FromBody] Pois value)

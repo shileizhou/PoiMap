@@ -243,17 +243,25 @@ function createMarker(obj,status) {
             //clearInfos();
 
             var ss = "";
+            var Id = obj.place_id;
 
-            $.ajax({
-                type: "GET",
-                data: JSON.stringify(obj.place_id),
-                datatype:"JSON" ,
-                url: "api/Pois",
-                contentType: "application/json",
-                success: function (result) {
-                    ss = result.Address;
-                }
-            });
+            $.getJSON('api/Pois' + '/' + Id)
+                .done(function (data) {
+                    ss = data.Address  ;
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    ss = err;
+                });
+
+            //$.ajax({
+            //    type: "GET",
+            //    data: JSON.stringify(Id),
+            //    datatype:'text' ,
+            //    url: 'api/Pois',
+            //    success: function (result) {
+            //        ss = result;
+            //    }
+            //});
 
             var infocontent = "<b><center><font size=4>" + obj.name + "</font></center></b><br>" +
                    "<table style='width:400px;'>" +
