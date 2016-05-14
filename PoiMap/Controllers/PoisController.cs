@@ -26,13 +26,15 @@ namespace PoiMap.Controllers
         //}
 
         //GET api/<controller>/5
-        public Pois Get([FromUri]string Id)
+        [System.Web.Http.HttpGet]
+        public Pois  Get([FromUri]string Id)
         {
             PoisOps poisInst;
             poisInst = new PoisOps();
 
             Pois myObjectResponse = poisInst.GetPoi(Id);
 
+            
             return myObjectResponse;
         }
 

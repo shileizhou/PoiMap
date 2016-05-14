@@ -243,18 +243,18 @@ function createMarker(obj,status) {
             //clearInfos();
 
             var ss = "";
-            var Id = obj.place_id;
+            var rr;
 
-            $.getJSON('api/Pois' + '/' + Id)
-                .done(function (data) {
-                    ss = data.Address  ;
-                })
-                .fail(function (jqXHR, textStatus, err) {
-                    ss = err;
-                });
+            //$.getJSON('api/Pois' + '/' + Id)
+            //    .done(function (data) {
+            //        ss = data.Address  ;
+            //    })
+            //    .fail(function (jqXHR, textStatus, err) {
+            //        ss = err;
+            //    });
 
             //$.ajax({
-            //    type: "GET",
+            //    type: 'GET',
             //    data: JSON.stringify(Id),
             //    datatype:'text' ,
             //    url: 'api/Pois',
@@ -263,23 +263,63 @@ function createMarker(obj,status) {
             //    }
             //});
 
+            //var poi = {
+            //            Placeid: obj.place_id,
+            //            Placename: 'a',
+            //            Address: 'a',
+            //            Country: 'a',
+            //            Description: 'a',
+            //            Longtitude: 2.2,
+            //            Latitude: 3.3,
+            //            Altitude: 1,
+            //            Icon: 'a',
+            //            MainPhoto: 'a',
+            //            Video: 'a',
+            //            Wiki: 'a',
+            //            ARName: 'a',
+            //            ARPhoto: 'a',
+            //            Website: 'a'
+            //};
+            $.ajax({
+                url: 'api/pois/' + obj.place_id,
+                type: 'GET',
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data, textStatus, xhr) {
+                    obj.name = ((data.PlaceName == '') ? obj.Placename : data.PlaceName);
+                    obj.Address = ((data.Address == '') ? obj.Address : data.Address);
+                    obj.Description = ((data.Description == '') ? obj.Description : data.Description);
+                    obj.website = ((data.website == '') ? obj.website : data.website);
+                    obj.Icon = ((data.Icon == '') ? obj.Icon : data.Icon);
+                    obj.MainPhoto = ((data.MainPhoto == '') ? obj.MainPhoto : data.MainPhoto);
+                    obj.Video = ((data.Video == '') ? obj.Video : data.Video);
+                    obj.Wiki = ((data.Wiki == '') ? obj.Wiki : data.Wiki);
+                    obj.ARName = ((data.ARName == '') ? obj.ARName : data.ARName);
+                    obj.ARPhoto = ((data.ARPhoto == '') ? obj.ARPhoto : data.ARPhoto);
+                    obj.ARWebsite = ((data.ARWebsite == '') ? obj.ARWebsite : data.ARWebsite);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+
             var infocontent = "<b><center><font size=4>" + obj.name + "</font></center></b><br>" +
                    "<table style='width:400px;'>" +
                    "<tr><td>PlaceId:</td> <td><input type='text' id='PlaceId' value='" + obj.place_id + "' style='width:300px;'/> </td> </tr>" +
                    "<tr><td>PlaceName:</td> <td><input type='text' id='PlaceName' value='" + obj.name + "'style='width:300px;'/></td> </tr>" +
-                   "<tr><td>Address:</td> <td><input type='text' id='Address' value='" + ss + "' style='width:300px;'/></td> </tr>" +
-                   "<tr><td>Description:</td> <td><textarea id='Description' maxlength='200' rows='5' cols='50'></textarea></td> </tr>" +
+                   "<tr><td>Address:</td> <td><input type='text' id='Address' value='" + obj.Address + "' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>Description:</td> <td><textarea id='Description' maxlength='200' rows='5' cols='50'  value='" + obj.Description + "' ></textarea></td> </tr>" +
                    "<tr><td>Website:</td> <td><input type='url' id='Website'  value='" + obj.website + "' style='width:300px;'/></td> </tr>" +
                    "<tr><td>Longtitude:</td> <td><input type='number' step='0.01' id='Longtitude'  value='" + obj.geometry.location.lng() + "' /></td> </tr>" +
                    "<tr><td>Latitude:</td> <td><input type='number' step='0.01' id='Latitude'  value='" + obj.geometry.location.lat() + "' /></td> </tr>" +
-                   "<tr><td>Altitude:</td> <td><input type='number' step='0.01' id='Altitude'  value='" + obj.geometry.location + "'/></td> </tr>" +
-                   "<tr><td>Icon:</td> <td><input type='url' id='Icon' style='width:300px;'/></td> </tr>" +
-                   "<tr><td>MainPhoto:</td> <td><input type='url' id='MainPhoto'  value='" + ss + "' style='width:300px;'/></td> </tr>" +
-                   "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:300px;'/></td> </tr>" +
-                   "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:300px;'/></td> </tr>" +
-                   "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;'/></td> </tr>" +
-                   "<tr><td>ARName:</td> <td><input type='text' id='ARPhoto' style='width:300px;'/></td> </tr>" +
-                   "<tr><td>ARName:</td> <td><input type='text' id='ARWebsite' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>Altitude:</td> <td><input type='number' step='0.01' id='Altitude'  value='" + obj.Altitude + "'/></td> </tr>" +
+                   "<tr><td>Icon:</td> <td><input type='url' id='Icon' style='width:300px;'  value='" + obj.Icon + "'/></td> </tr>" +
+                   "<tr><td>MainPhoto:</td> <td><input type='url' id='MainPhoto'  value='" + obj.MainPhoto + "' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:300px;' value='" + obj.Video + "'/></td> </tr>" +
+                   "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:300px;' value='" + obj.Wiki + "'/></td> </tr>" +
+                   "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;' value='" + obj.ARName + "'/></td> </tr>" +
+                   "<tr><td>ARName:</td> <td><input type='text' id='ARPhoto' style='width:300px;' value='" + obj.ARPhoto + "'/></td> </tr>" +
+                   "<tr><td>ARName:</td> <td><input type='text' id='ARWebsite' style='width:300px;' value='" + obj.ARWebsite + "'/></td> </tr>" +
                    "<tr><td></td><td><b><input type='button' value='Save' onclick='saveData()'/></b></td></tr>";
 
             // prepare info window

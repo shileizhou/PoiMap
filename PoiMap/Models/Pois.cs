@@ -74,7 +74,19 @@ namespace PoiMap.Models
                         {
                             if (dr.Read())
                             {
+                                oPois.PlaceName = dr["PlaceName"].ToString();
                                 oPois.Address = dr["Address"].ToString();
+                                oPois.Country = dr["Country"].ToString();
+                                oPois.Description = dr["Description"].ToString();
+                                oPois.Longtitude = (decimal)dr["Longtitude"];
+                                oPois.Latitude = (decimal)dr["Latitude"];
+                                oPois.Altitude = (decimal)dr["Altitude"];
+                                oPois.Icon = dr["Icon"].ToString();
+                                oPois.MainPhoto = dr["MainPhoto"].ToString();
+                                oPois.Wiki = dr["Wiki"].ToString();
+                                oPois.ARName = dr["ARName"].ToString();
+                                oPois.ARPhoto = dr["ARPhoto"].ToString();
+                                oPois.Website = dr["Website"].ToString();
                                 return oPois;
                             }
                             else
