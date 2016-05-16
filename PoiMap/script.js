@@ -186,7 +186,7 @@ function createMarker(obj,status) {
 
     if (status == google.maps.places.PlacesServiceStatus.OK) {
 
-        var ss;
+        var ss = '';
         var infowindow;
         var photos = obj.photos;
 
@@ -296,7 +296,7 @@ function createMarker(obj,status) {
                     obj.Wiki = ((data.Wiki == '') ? obj.Wiki : data.Wiki);
                     obj.ARName = ((data.ARName == '') ? obj.ARName : data.ARName);
                     obj.ARPhoto = ((data.ARPhoto == '') ? obj.ARPhoto : data.ARPhoto);
-                    obj.ARWebsite = ((data.ARWebsite == '') ? obj.ARWebsite : data.ARWebsite);
+                    obj.website = ((data.Website == '') ? obj.website : data.Website);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     alert(textStatus);
@@ -319,7 +319,7 @@ function createMarker(obj,status) {
                    "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:300px;' value='" + obj.Wiki + "'/></td> </tr>" +
                    "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;' value='" + obj.ARName + "'/></td> </tr>" +
                    "<tr><td>ARName:</td> <td><input type='text' id='ARPhoto' style='width:300px;' value='" + obj.ARPhoto + "'/></td> </tr>" +
-                   "<tr><td>ARName:</td> <td><input type='text' id='ARWebsite' style='width:300px;' value='" + obj.ARWebsite + "'/></td> </tr>" +
+                   "<tr><td>ARName:</td> <td><input type='text' id='website' style='width:300px;' value='" + obj.website + "'/></td> </tr>" +
                    "<tr><td></td><td><b><input type='button' value='Save' onclick='saveData()'/></b></td></tr>";
 
             // prepare info window

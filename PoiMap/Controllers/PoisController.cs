@@ -61,7 +61,16 @@ namespace PoiMap.Controllers
             PoisOps poisInst;
             poisInst = new PoisOps();
 
-            return poisInst.InsertPoi(value);
+            string ss = poisInst.InsertPoi(value);
+
+            if (ss.Contains("duplicate key"))
+            {
+                return poisInst.UpdatePoi(value);
+            }
+            else
+            {
+                return ss;
+            }
 
         }
 

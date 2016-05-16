@@ -53,6 +53,50 @@ namespace PoiMap.Models
             return "Success";
         }
 
+        public string UpdatePoi(Pois InputPoi)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(
+                                          "Server=tcp:livemap.database.windows.net,1433;Database=livemap;User ID=livemap@livemap;Password=Zhuzhu88;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
+                {
+                    connection.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("UpdatePoi", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@PlaceId", InputPoi.PlaceId);
+                        cmd.Parameters.AddWithValue("@PlaceName", InputPoi.PlaceName);
+                        cmd.Parameters.AddWithValue("@Address", InputPoi.Address);
+                        cmd.Parameters.AddWithValue("@Country", InputPoi.Country);
+                        cmd.Parameters.AddWithValue("@Description", InputPoi.Description);
+                        cmd.Parameters.AddWithValue("@Longtitude", InputPoi.Longtitude);
+                        cmd.Parameters.AddWithValue("@Latitude", InputPoi.Latitude);
+                        cmd.Parameters.AddWithValue("@Altitude", InputPoi.Altitude);
+                        cmd.Parameters.AddWithValue("@Icon", InputPoi.Icon);
+                        cmd.Parameters.AddWithValue("@MainPhoto", InputPoi.MainPhoto);
+                        cmd.Parameters.AddWithValue("@Video", InputPoi.Video);
+                        cmd.Parameters.AddWithValue("@Wiki", InputPoi.Wiki);
+                        cmd.Parameters.AddWithValue("@ARName", InputPoi.ARName);
+                        cmd.Parameters.AddWithValue("@ARPhoto", InputPoi.ARPhoto);
+                        cmd.Parameters.AddWithValue("@Website", InputPoi.Website);
+
+                        cmd.ExecuteNonQuery();
+
+                    }
+
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return ex.Message;
+            }
+
+            return "Success";
+        }
+
+
         public Pois GetPoi(string inPlaceid)
         {
             Pois oPois = new Pois();
