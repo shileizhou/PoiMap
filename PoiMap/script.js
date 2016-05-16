@@ -242,44 +242,6 @@ function createMarker(obj,status) {
 
             //clearInfos();
 
-            var ss = "";
-            var rr;
-
-            //$.getJSON('api/Pois' + '/' + Id)
-            //    .done(function (data) {
-            //        ss = data.Address  ;
-            //    })
-            //    .fail(function (jqXHR, textStatus, err) {
-            //        ss = err;
-            //    });
-
-            //$.ajax({
-            //    type: 'GET',
-            //    data: JSON.stringify(Id),
-            //    datatype:'text' ,
-            //    url: 'api/Pois',
-            //    success: function (result) {
-            //        ss = result;
-            //    }
-            //});
-
-            //var poi = {
-            //            Placeid: obj.place_id,
-            //            Placename: 'a',
-            //            Address: 'a',
-            //            Country: 'a',
-            //            Description: 'a',
-            //            Longtitude: 2.2,
-            //            Latitude: 3.3,
-            //            Altitude: 1,
-            //            Icon: 'a',
-            //            MainPhoto: 'a',
-            //            Video: 'a',
-            //            Wiki: 'a',
-            //            ARName: 'a',
-            //            ARPhoto: 'a',
-            //            Website: 'a'
-            //};
             $.ajax({
                 url: 'api/pois/' + obj.place_id,
                 type: 'GET',
@@ -291,7 +253,7 @@ function createMarker(obj,status) {
                     obj.Description = ((data.Description == '') ? obj.Description : data.Description);
                     obj.website = ((data.website == '') ? obj.website : data.website);
                     obj.Icon = ((data.Icon == '') ? obj.Icon : data.Icon);
-                    obj.MainPhoto = ((data.MainPhoto == '') ? obj.MainPhoto : data.MainPhoto);
+                    obj.MainPhoto = ((data.MainPhoto == '') ? ss : data.MainPhoto);
                     obj.Video = ((data.Video == '') ? obj.Video : data.Video);
                     obj.Wiki = ((data.Wiki == '') ? obj.Wiki : data.Wiki);
                     obj.ARName = ((data.ARName == '') ? obj.ARName : data.ARName);
@@ -318,8 +280,7 @@ function createMarker(obj,status) {
                    "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:420px;' value='" + obj.Video + "'/></td> </tr>" +
                    "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:420px;' value='" + obj.Wiki + "'/></td> </tr>" +
                    "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:420px;' value='" + obj.ARName + "'/></td> </tr>" +
-                   "<tr><td>ARName:</td> <td><input type='text' id='ARPhoto' style='width:420px;' value='" + obj.ARPhoto + "'/></td> </tr>" +
-                   "<tr><td>ARName:</td> <td><input type='text' id='website' style='width:420px;' value='" + obj.website + "'/></td> </tr>" +
+                   "<tr><td>ARPhoto:</td> <td><input type='text' id='ARPhoto' style='width:420px;' value='" + obj.ARPhoto + "'/></td> </tr>" +
                    "<tr><td></td><td><b><input type='button' value='Save' onclick='saveData()'/></b></td></tr>";
 
             // prepare info window
