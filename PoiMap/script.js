@@ -307,19 +307,19 @@ function createMarker(obj,status) {
                    "<table style='width:400px;'>" +
                    "<tr><td>PlaceId:</td> <td><input type='text' id='PlaceId' value='" + obj.place_id + "' style='width:300px;'/> </td> </tr>" +
                    "<tr><td>PlaceName:</td> <td><input type='text' id='PlaceName' value='" + obj.name + "'style='width:300px;'/></td> </tr>" +
-                   "<tr><td>Address:</td> <td><input type='text' id='Address' value='" + obj.Address + "' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>Address:</td> <td><input type='text' id='Address' value='" + obj.Address + "' style='width:420px;'/></td> </tr>" +
                    "<tr><td>Description:</td> <td><textarea id='Description' maxlength='200' rows='5' cols='50'  value='" + obj.Description + "' ></textarea></td> </tr>" +
-                   "<tr><td>Website:</td> <td><input type='url' id='Website'  value='" + obj.website + "' style='width:300px;'/></td> </tr>" +
+                   "<tr><td>Website:</td> <td><input type='url' id='Website'  value='" + obj.website + "' style='width:420px;'/></td> </tr>" +
                    "<tr><td>Longtitude:</td> <td><input type='number' step='0.01' id='Longtitude'  value='" + obj.geometry.location.lng() + "' /></td> </tr>" +
                    "<tr><td>Latitude:</td> <td><input type='number' step='0.01' id='Latitude'  value='" + obj.geometry.location.lat() + "' /></td> </tr>" +
                    "<tr><td>Altitude:</td> <td><input type='number' step='0.01' id='Altitude'  value='" + obj.Altitude + "'/></td> </tr>" +
-                   "<tr><td>Icon:</td> <td><input type='url' id='Icon' style='width:300px;'  value='" + obj.Icon + "'/></td> </tr>" +
-                   "<tr><td>MainPhoto:</td> <td><input type='url' id='MainPhoto'  value='" + obj.MainPhoto + "' style='width:300px;'/></td> </tr>" +
-                   "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:300px;' value='" + obj.Video + "'/></td> </tr>" +
-                   "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:300px;' value='" + obj.Wiki + "'/></td> </tr>" +
-                   "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:300px;' value='" + obj.ARName + "'/></td> </tr>" +
-                   "<tr><td>ARName:</td> <td><input type='text' id='ARPhoto' style='width:300px;' value='" + obj.ARPhoto + "'/></td> </tr>" +
-                   "<tr><td>ARName:</td> <td><input type='text' id='website' style='width:300px;' value='" + obj.website + "'/></td> </tr>" +
+                   "<tr><td>Icon:</td> <td><input type='url' id='Icon' style='width:420px;'  value='" + obj.Icon + "'/></td> </tr>" +
+                   "<tr><td>MainPhoto:</td> <td><input type='url' id='MainPhoto'  value='" + obj.MainPhoto + "' style='width:420px;'/></td> </tr>" +
+                   "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:420px;' value='" + obj.Video + "'/></td> </tr>" +
+                   "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:420px;' value='" + obj.Wiki + "'/></td> </tr>" +
+                   "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:420px;' value='" + obj.ARName + "'/></td> </tr>" +
+                   "<tr><td>ARName:</td> <td><input type='text' id='ARPhoto' style='width:420px;' value='" + obj.ARPhoto + "'/></td> </tr>" +
+                   "<tr><td>ARName:</td> <td><input type='text' id='website' style='width:420px;' value='" + obj.website + "'/></td> </tr>" +
                    "<tr><td></td><td><b><input type='button' value='Save' onclick='saveData()'/></b></td></tr>";
 
             // prepare info window
