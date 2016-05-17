@@ -240,6 +240,22 @@ function createMarker(obj,status) {
         // add event handler to current marker
         google.maps.event.addListener(mark, 'click', function () {
 
+            var poiData = {
+                Placename: '',
+                Address: '',
+                Country: '',
+                Description: '',
+                Longtitude: 0,
+                Latitude: 0,
+                Altitude: 0,
+                Icon: '',
+                MainPhoto: '',
+                Video: '',
+                Wiki: '',
+                ARName: '',
+                ARPhoto: '',
+                Website: ''
+            };
             //clearInfos();
 
             $.ajax({
@@ -249,28 +265,27 @@ function createMarker(obj,status) {
                 contentType: 'application/json; charset=utf-8',
                 success: function (data, textStatus, xhr) {
 
-                    if (typeof obj.name == 'undefined') { obj.name = '' };
-                    if (typeof obj.Address == 'undefined') { obj.Address = '' };
-                    if (typeof obj.website == 'undefined') { obj.website = '' };
-                    if (typeof obj.Description == 'undefined') { obj.Description = '' };
-                    if (typeof obj.Altitude == 'undefined') { obj.Altitude = 0 };
-                    if (typeof obj.Icon == 'undefined') { obj.Icon = '' };
-                    if (typeof obj.MainPhoto == 'undefined') { obj.MainPhoto = '' };
-                    if (typeof obj.Video == 'undefined') { obj.Video = '' };
-                    if (typeof obj.Wiki == 'undefined') { obj.Wiki = '' };
-                    if (typeof obj.ARName == 'undefined') { obj.ARName = '' };
-                    if (typeof obj.ARPhoto == 'undefined') { obj.ARPhoto = '' };
+                    if (typeof obj.name != 'undefined') { poiData.name = obj.name };
+                    if (typeof obj.vicinity != 'undefined') { poiData.Address = obj.vicinity };
+                    if (typeof obj.website != 'undefined') { poiData.Website = obj.website };
+                    poiData.MainPhoto = ss ;
 
-                    obj.name = ((data.PlaceName == '') ? obj.Placename : data.PlaceName);
-                    obj.Address = ((data.Address == '') ? obj.Address : data.Address);
-                    obj.Description = ((data.Description == '') ? obj.Description : data.Description);
-                    obj.website = ((data.website == '') ? obj.website : data.website);
-                    obj.Icon = ((data.Icon == '') ? obj.Icon : data.Icon);
-                    obj.MainPhoto = ((data.MainPhoto == '') ? ss : data.MainPhoto);
-                    obj.Video = ((data.Video == '') ? obj.Video : data.Video);
-                    obj.Wiki = ((data.Wiki == '') ? obj.Wiki : data.Wiki);
-                    obj.ARName = ((data.ARName == '') ? obj.ARName : data.ARName);
-                    obj.ARPhoto = ((data.ARPhoto == '') ? obj.ARPhoto : data.ARPhoto);
+                    if (data) {
+                        poiData.name = ((data.PlaceName == '') ? poiData.Placename : data.PlaceName);
+                        poiData.Address = ((data.Address == '') ? poiData.Address : data.Address);
+                        poiData.Description = data.Description ;
+                        poiData.Website = ((data.website == '') ? poiData.Website : data.Website);
+                        poiData.Icon = data.Icon ;
+                        poiData.Altitude = data.Altitude;
+                        poiData.MainPhoto = ((data.MainPhoto == '') ? ss : data.MainPhoto);
+                        poiData.Video = data.Video ;
+                        poiData.Wiki = data.Wiki ;
+                        poiData.ARName = data.ARName ;
+                        poiData.ARPhoto = data.ARPhoto ;
+                    }
+                    else {
+
+                    };
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     alert(textStatus);
@@ -281,19 +296,19 @@ function createMarker(obj,status) {
             var infocontent = "<b><center><font size=4>" + obj.name + "</font></center></b><br>" +
                    "<table style='width:400px;'>" +
                    "<tr><td>PlaceId:</td> <td><input type='text' id='PlaceId' value='" + obj.place_id + "' style='width:300px;'/> </td> </tr>" +
-                   "<tr><td>PlaceName:</td> <td><input type='text' id='PlaceName' value='" + obj.name + "'style='width:300px;'/></td> </tr>" +
-                   "<tr><td>Address:</td> <td><input type='text' id='Address' value='" + obj.Address + "' style='width:420px;'/></td> </tr>" +
-                   "<tr><td>Description:</td> <td><textarea id='Description' maxlength='200' rows='5' cols='50'  value='" + obj.Description + "' ></textarea></td> </tr>" +
-                   "<tr><td>Website:</td> <td><input type='url' id='Website'  value='" + obj.website + "' style='width:420px;'/></td> </tr>" +
+                   "<tr><td>PlaceName:</td> <td><input type='text' id='PlaceName' value='" + poiData.name + "'style='width:300px;'/></td> </tr>" +
+                   "<tr><td>Address:</td> <td><input type='text' id='Address' value='" + poiData.Address + "' style='width:420px;'/></td> </tr>" +
+                   "<tr><td>Description:</td> <td><textarea id='Description' maxlength='200' rows='5' cols='50'>" + poiData.Description + "</textarea></td> </tr>" +
+                   "<tr><td>Website:</td> <td><input type='url' id='Website'  value='" + poiData.Website + "' style='width:420px;'/></td> </tr>" +
                    "<tr><td>Longtitude:</td> <td><input type='number' step='0.01' id='Longtitude'  value='" + obj.geometry.location.lng() + "' /></td> </tr>" +
                    "<tr><td>Latitude:</td> <td><input type='number' step='0.01' id='Latitude'  value='" + obj.geometry.location.lat() + "' /></td> </tr>" +
-                   "<tr><td>Altitude:</td> <td><input type='number' step='0.01' id='Altitude'  value='" + obj.Altitude + "'/></td> </tr>" +
-                   "<tr><td>Icon:</td> <td><input type='url' id='Icon' style='width:420px;'  value='" + obj.Icon + "'/></td> </tr>" +
-                   "<tr><td>MainPhoto:</td> <td><input type='url' id='MainPhoto'  value='" + obj.MainPhoto + "' style='width:420px;'/></td> </tr>" +
-                   "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:420px;' value='" + obj.Video + "'/></td> </tr>" +
-                   "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:420px;' value='" + obj.Wiki + "'/></td> </tr>" +
-                   "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:420px;' value='" + obj.ARName + "'/></td> </tr>" +
-                   "<tr><td>ARPhoto:</td> <td><input type='text' id='ARPhoto' style='width:420px;' value='" + obj.ARPhoto + "'/></td> </tr>" +
+                   "<tr><td>Altitude:</td> <td><input type='number' step='0.01' id='Altitude'  value='" + poiData.Altitude + "'/></td> </tr>" +
+                   "<tr><td>Icon:</td> <td><input type='url' id='Icon' style='width:420px;'  value='" + poiData.Icon + "'/></td> </tr>" +
+                   "<tr><td>MainPhoto:</td> <td><input type='url' id='MainPhoto'  value='" + poiData.MainPhoto + "' style='width:420px;'/></td> </tr>" +
+                   "<tr><td>Video:</td> <td><input type='url' id='Video' style='width:420px;' value='" + poiData.Video + "'/></td> </tr>" +
+                   "<tr><td>Wiki:</td> <td><input type='url' id='Wiki' style='width:420px;' value='" + poiData.Wiki + "'/></td> </tr>" +
+                   "<tr><td>ARName:</td> <td><input type='text' id='ARName' style='width:420px;' value='" + poiData.ARName + "'/></td> </tr>" +
+                   "<tr><td>ARPhoto:</td> <td><input type='text' id='ARPhoto' style='width:420px;' value='" + poiData.ARPhoto + "'/></td> </tr>" +
                    "<tr><td></td><td><b><input type='button' value='Save' onclick='saveData()'/></b></td></tr>";
 
             // prepare info window
