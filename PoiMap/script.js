@@ -258,7 +258,6 @@ function createMarker(obj,status) {
                     obj.Wiki = ((data.Wiki == '') ? obj.Wiki : data.Wiki);
                     obj.ARName = ((data.ARName == '') ? obj.ARName : data.ARName);
                     obj.ARPhoto = ((data.ARPhoto == '') ? obj.ARPhoto : data.ARPhoto);
-                    obj.website = ((data.Website == '') ? obj.website : data.Website);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     alert(textStatus);
