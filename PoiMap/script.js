@@ -248,6 +248,19 @@ function createMarker(obj,status) {
                 async: false,
                 contentType: 'application/json; charset=utf-8',
                 success: function (data, textStatus, xhr) {
+
+                    if (typeof obj.name == 'undefined') { obj.name = '' };
+                    if (typeof obj.Address == 'undefined') { obj.Address = '' };
+                    if (typeof obj.website == 'undefined') { obj.website = '' };
+                    if (typeof obj.Description == 'undefined') { obj.Description = '' };
+                    if (typeof obj.Altitude == 'undefined') { obj.Altitude = 0 };
+                    if (typeof obj.Icon == 'undefined') { obj.Icon = '' };
+                    if (typeof obj.MainPhoto == 'undefined') { obj.MainPhoto = '' };
+                    if (typeof obj.Video == 'undefined') { obj.Video = '' };
+                    if (typeof obj.Wiki == 'undefined') { obj.Wiki = '' };
+                    if (typeof obj.ARName == 'undefined') { obj.ARName = '' };
+                    if (typeof obj.ARPhoto == 'undefined') { obj.ARPhoto = '' };
+
                     obj.name = ((data.PlaceName == '') ? obj.Placename : data.PlaceName);
                     obj.Address = ((data.Address == '') ? obj.Address : data.Address);
                     obj.Description = ((data.Description == '') ? obj.Description : data.Description);
@@ -263,6 +276,7 @@ function createMarker(obj,status) {
                     alert(textStatus);
                 }
             });
+
 
             var infocontent = "<b><center><font size=4>" + obj.name + "</font></center></b><br>" +
                    "<table style='width:400px;'>" +
