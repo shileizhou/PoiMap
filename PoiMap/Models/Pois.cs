@@ -128,6 +128,7 @@ namespace PoiMap.Models
                                 oPois.Icon = dr["Icon"].ToString();
                                 oPois.MainPhoto = dr["MainPhoto"].ToString();
                                 oPois.Wiki = dr["Wiki"].ToString();
+                                oPois.Video= dr["Video"].ToString();
                                 oPois.ARName = dr["ARName"].ToString();
                                 oPois.ARPhoto = dr["ARPhoto"].ToString();
                                 oPois.Website = dr["Website"].ToString();
