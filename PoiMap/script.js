@@ -181,6 +181,7 @@ function getLocDetails(obj) {
     service = new google.maps.places.PlacesService(map);
     service.getDetails(request, createMarker);
 
+    map.panTo(obj.geometry.location);
 }
 // creare single marker function
 function createMarker(obj,status) {
@@ -327,3 +328,4 @@ function createMarker(obj,status) {
 
 // initialization
 google.maps.event.addDomListener(window, 'load', initialize);
+
