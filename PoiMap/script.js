@@ -87,20 +87,21 @@ function findPlaces() {
     var request = {
         location: cur_location,
         radius: radius,
-        types: [type]
-        //key: 'AIzaSyBEmSuFeHW0LS6o8fEBH7uVo9AK3qw63ok'
+        types: [type],
+        query: [keyword]
+        //key: 'AIzaSyB1Cbr2BZMzxANaHWsEt06oLd11t7RtBfI'
         //language: 'ar'
 
     };
 
-    if (keyword) {
-        request.keyword = [keyword];
-    }
+    //if (keyword) {
+    //    request.name = [keyword];
+    //}
 
 
     // send request
     service = new google.maps.places.PlacesService(map);
-    service.nearbySearch(request, createMarkers);
+    service.textSearch(request, createMarkers);
 
 }
 // create markers (from 'findPlaces' function)
@@ -261,16 +262,19 @@ function createMarker(obj,status) {
                     if (typeof obj.ARName == 'undefined') { obj.ARName = '' };
                     if (typeof obj.ARPhoto == 'undefined') { obj.ARPhoto = '' };
 
-                    obj.name = ((data.PlaceName == '') ? obj.Placename : data.PlaceName);
-                    obj.Address = ((data.Address == '') ? obj.Address : data.Address);
-                    obj.Description = ((data.Description == '') ? obj.Description : data.Description);
-                    obj.website = ((data.website == '') ? obj.website : data.website);
-                    obj.Icon = ((data.Icon == '') ? obj.Icon : data.Icon);
-                    obj.MainPhoto = ((data.MainPhoto == '') ? ss : data.MainPhoto);
-                    obj.Video = ((data.Video == '') ? obj.Video : data.Video);
-                    obj.Wiki = ((data.Wiki == '') ? obj.Wiki : data.Wiki);
-                    obj.ARName = ((data.ARName == '') ? obj.ARName : data.ARName);
-                    obj.ARPhoto = ((data.ARPhoto == '') ? obj.ARPhoto : data.ARPhoto);
+                    if (data)
+                    {
+                        obj.name = ((data.PlaceName == '') ? obj.Placename : data.PlaceName);
+                        obj.Address = ((data.Address == '') ? obj.Address : data.Address);
+                        obj.Description = ((data.Description == '') ? obj.Description : data.Description);
+                        obj.website = ((data.website == '') ? obj.website : data.website);
+                        obj.Icon = ((data.Icon == '') ? obj.Icon : data.Icon);
+                        obj.MainPhoto = ((data.MainPhoto == '') ? ss : data.MainPhoto);
+                        obj.Video = ((data.Video == '') ? obj.Video : data.Video);
+                        obj.Wiki = ((data.Wiki == '') ? obj.Wiki : data.Wiki);
+                        obj.ARName = ((data.ARName == '') ? obj.ARName : data.ARName);
+                        obj.ARPhoto = ((data.ARPhoto == '') ? obj.ARPhoto : data.ARPhoto);
+                    }
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     alert(textStatus);
