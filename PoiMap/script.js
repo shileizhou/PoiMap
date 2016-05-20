@@ -284,22 +284,7 @@ function createMarker(obj,status) {
                         poiData.ARName = data.ARName ;
                         poiData.ARPhoto = data.ARPhoto ;
                     }
-                    else {
-
-                    if (data)
-                    {
-                        obj.name = ((data.PlaceName == '') ? obj.Placename : data.PlaceName);
-                        obj.Address = ((data.Address == '') ? obj.Address : data.Address);
-                        obj.Description = ((data.Description == '') ? obj.Description : data.Description);
-                        obj.website = ((data.website == '') ? obj.website : data.website);
-                        obj.Icon = ((data.Icon == '') ? obj.Icon : data.Icon);
-                        obj.MainPhoto = ((data.MainPhoto == '') ? ss : data.MainPhoto);
-                        obj.Video = ((data.Video == '') ? obj.Video : data.Video);
-                        obj.Wiki = ((data.Wiki == '') ? obj.Wiki : data.Wiki);
-                        obj.ARName = ((data.ARName == '') ? obj.ARName : data.ARName);
-                        obj.ARPhoto = ((data.ARPhoto == '') ? obj.ARPhoto : data.ARPhoto);
-                    }
-                },
+                },   
                 error: function (xhr, textStatus, errorThrown) {
                     alert(textStatus);
                 }
