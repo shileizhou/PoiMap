@@ -3,6 +3,9 @@
     position: relative;
     width: 1200px;
 }
+
+.labels {color: white;font-size: 36px;font-weight: bold;text-align: right;white-space: nowrap;}
+
 .actions {
     background-color: #FFFFFF;
     bottom: 10px;
