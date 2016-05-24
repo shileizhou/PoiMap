@@ -87,20 +87,21 @@ function findPlaces() {
     var request = {
         location: cur_location,
         radius: radius,
-        types: [type]
-        //key: 'AIzaSyBEmSuFeHW0LS6o8fEBH7uVo9AK3qw63ok'
+        types: [type],
+        query: [keyword]
+        //key: 'AIzaSyB1Cbr2BZMzxANaHWsEt06oLd11t7RtBfI'
         //language: 'ar'
 
     };
 
-    if (keyword) {
-        request.keyword = [keyword];
-    }
+    //if (keyword) {
+    //    request.name = [keyword];
+    //}
 
 
     // send request
     service = new google.maps.places.PlacesService(map);
-    service.nearbySearch(request, createMarkers);
+    service.textSearch(request, createMarkers);
 
 }
 // create markers (from 'findPlaces' function)
@@ -180,6 +181,7 @@ function getLocDetails(obj) {
     service = new google.maps.places.PlacesService(map);
     service.getDetails(request, createMarker);
 
+    map.panTo(obj.geometry.location);
 }
 // creare single marker function
 function createMarker(obj,status) {
@@ -283,10 +285,7 @@ function createMarker(obj,status) {
                         poiData.ARName = data.ARName ;
                         poiData.ARPhoto = data.ARPhoto ;
                     }
-                    else {
-
-                    };
-                },
+                },   
                 error: function (xhr, textStatus, errorThrown) {
                     alert(textStatus);
                 }
@@ -329,3 +328,4 @@ function createMarker(obj,status) {
 
 // initialization
 google.maps.event.addDomListener(window, 'load', initialize);
+
